@@ -4,14 +4,18 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Nhập Mật Khẩu</title>
+
   <link rel="stylesheet" href="style.css?v=5" />
+
+  
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
 
   <style>
     body {
       background: linear-gradient(135deg, #ffdde1, #ee9ca7);
     }
 
-
+    
     .time-wrapper {
       display: flex;
       justify-content: center;
@@ -20,12 +24,13 @@
     }
 
     .time-box {
-      background: rgba(255, 255, 255, 0.08);
+      font-family: 'Quicksand', sans-serif; 
+      background: rgba(255, 255, 255, 0.15);
       border-radius: 20px;
       padding: 20px 30px;
       text-align: center;
       min-width: 260px;
-      box-shadow: 0 0 20px rgba(255, 105, 180, 0.25);
+      box-shadow: 0 0 20px rgba(255, 105, 180, 0.3);
     }
 
     .date {
@@ -33,15 +38,15 @@
       color: #ffffff;
       margin-bottom: 8px;
       text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
-    }
-    
-    .clock {
-      font-size: 42px;
-      font-weight: bold;
-      color: #ff69b4;
-      letter-spacing: 2px;
+      font-weight: 600;
     }
 
+    .clock {
+      font-size: 42px;
+      font-weight: 700;
+      color: #ff69b4;
+      letter-spacing: 1px;
+    }
     .password-section {
       display: none;
     }
@@ -52,7 +57,7 @@
   <div class="container">
     <div class="content">
 
-      <!-- KHUNG THỜI GIAN -->
+    
       <div class="time-wrapper">
         <div class="time-box">
           <div class="date" id="date"></div>
@@ -60,11 +65,11 @@
         </div>
       </div>
 
-      <!-- KHUNG NHẬP PASS -->
+      
       <div class="password-section" id="lockBox">
         <img src="images/avatar.jpg" alt="Avatar" class="avatar" />
 
-        <h1>NHẬP PASS ĐI NGƯỜI ĐẸP</h1>
+        <h1>NHẬP PASS ĐI NGƯỜI ĐẸP 💕</h1>
 
         <input type="text" id="password" readonly />
 
@@ -88,19 +93,26 @@
     </div>
   </div>
 
-  <!-- SCRIPT THỜI GIAN + DELAY 5s -->
+  
   <script>
-    let unlocked = false;
     let delayStarted = false;
 
     function updateTime() {
       const now = new Date();
       const year = now.getFullYear();
 
-      // mốc sinh nhật năm hiện tại
-      const birthday = new Date(year, 1, 2, 0, 0, 0); // tháng 1 = tháng 2
+      
+      const birthday = new Date(year, 1, 2, 0, 0, 0);
 
-      const days = ["Chủ nhật","Thứ hai","Thứ ba","Thứ tư","Thứ năm","Thứ sáu","Thứ bảy"];
+      const days = [
+        "Chủ nhật",
+        "Thứ hai",
+        "Thứ ba",
+        "Thứ tư",
+        "Thứ năm",
+        "Thứ sáu",
+        "Thứ bảy"
+      ];
 
       document.getElementById("date").innerText =
         `${days[now.getDay()]}, ${now.getDate()}/${now.getMonth() + 1}/${now.getFullYear()}`;
@@ -110,14 +122,11 @@
         `${String(now.getMinutes()).padStart(2, "0")}:` +
         `${String(now.getSeconds()).padStart(2, "0")}`;
 
-      // tới đúng 00:00:00 ngày sinh
       if (now >= birthday && !delayStarted) {
         delayStarted = true;
-
         setTimeout(() => {
           document.getElementById("lockBox").style.display = "block";
-          unlocked = true;
-        }, 5000); // ⏳ đợi 5 giây
+        }, 5000); 
       }
     }
 
@@ -125,7 +134,7 @@
     updateTime();
   </script>
 
-  <!-- SCRIPT PASS -->
+  
   <script src="script.js?v=2"></script>
 </body>
 </html>
