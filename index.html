@@ -1,140 +1,38 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nhập Mật Khẩu</title>
-
-  <link rel="stylesheet" href="style.css?v=5" />
-
-  
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
-
-  <style>
-    body {
-      background: linear-gradient(135deg, #ffdde1, #ee9ca7);
-    }
-
-    
-    .time-wrapper {
-      display: flex;
-      justify-content: center;
-      margin-top: 40px;
-      margin-bottom: 30px;
-    }
-
-    .time-box {
-      font-family: 'Quicksand', sans-serif; 
-      background: rgba(255, 255, 255, 0.15);
-      border-radius: 20px;
-      padding: 20px 30px;
-      text-align: center;
-      min-width: 260px;
-      box-shadow: 0 0 20px rgba(255, 105, 180, 0.3);
-    }
-
-    .date {
-      font-size: 16px;
-      color: #ffffff;
-      margin-bottom: 8px;
-      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
-      font-weight: 600;
-    }
-
-    .clock {
-      font-size: 42px;
-      font-weight: 700;
-      color: #ff69b4;
-      letter-spacing: 1px;
-    }
-    .password-section {
-      display: none;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chúc Mừng Sinh Nhật</title>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="sn.css">
 </head>
 
 <body>
-  <div class="container">
-    <div class="content">
+    <div class="hearts" id="hearts"></div>
 
-    
-      <div class="time-wrapper">
-        <div class="time-box">
-          <div class="date" id="date"></div>
-          <div class="clock" id="clock"></div>
+    <div class="envelope closed" id="envelope">
+        <div class="envelope-flap"></div>
+
+        <!-- LETTER -->
+        <div class="letter" id="letter">
+            <h1>Chúc Mừng Sinh Nhật 🎉</h1>
+            <p>Thân gửi Trần Thị Ngọc Vy,</p>
+            <p>Hôm nay là một ngày thật đặc biệt, vì đó là ngày một người tuyệt vời như bạn được sinh ra.</p>
+            <p>Mong rằng tuổi mới sẽ mang đến cho bạn thật nhiều niềm vui, sức khỏe và những điều tốt đẹp.</p>
+            <p>Cảm ơn bạn vì luôn mang đến năng lượng tích cực và những nụ cười dễ thương cho mọi người xung quanh.</p>
+            <p>Chúc bạn luôn tự tin, hạnh phúc và đạt được mọi điều bạn mong muốn.</p>
+            <p>Sinh nhật thật vui vẻ nhé! 🎂💖</p>
+            <p class="signature" id="signature">Thân mến,<br>Vanh</p>
         </div>
-      </div>
-
-      
-      <div class="password-section" id="lockBox">
-        <img src="images/avatar.jpg" alt="Avatar" class="avatar" />
-
-        <h1>NHẬP PASS ĐI NGƯỜI ĐẸP 💕</h1>
-
-        <input type="text" id="password" readonly />
-
-        <div class="keypad">
-          <button onclick="addNumber('1')">1</button>
-          <button onclick="addNumber('2')">2</button>
-          <button onclick="addNumber('3')">3</button>
-          <button onclick="addNumber('4')">4</button>
-          <button onclick="addNumber('5')">5</button>
-          <button onclick="addNumber('6')">6</button>
-          <button onclick="addNumber('7')">7</button>
-          <button onclick="addNumber('8')">8</button>
-          <button onclick="addNumber('9')">9</button>
-          <button onclick="addNumber('0')" class="zero">0</button>
-          <button onclick="clearPassword()" class="clear">✖</button>
-        </div>
-
-        <button onclick="checkPassword()" class="submit">✔</button>
-      </div>
+        <!-- END LETTER -->
 
     </div>
-  </div>
 
-  
-  <script>
-    let delayStarted = false;
+    <button class="next-button" id="nextButton">Đi tiếp 👉</button>
 
-    function updateTime() {
-      const now = new Date();
-      const year = now.getFullYear();
-
-      
-      const birthday = new Date(year, 1, 2, 0, 0, 0);
-
-      const days = [
-        "Chủ nhật",
-        "Thứ hai",
-        "Thứ ba",
-        "Thứ tư",
-        "Thứ năm",
-        "Thứ sáu",
-        "Thứ bảy"
-      ];
-
-      document.getElementById("date").innerText =
-        `${days[now.getDay()]}, ${now.getDate()}/${now.getMonth() + 1}/${now.getFullYear()}`;
-
-      document.getElementById("clock").innerText =
-        `${String(now.getHours()).padStart(2, "0")}:` +
-        `${String(now.getMinutes()).padStart(2, "0")}:` +
-        `${String(now.getSeconds()).padStart(2, "0")}`;
-
-      if (now >= birthday && !delayStarted) {
-        delayStarted = true;
-        setTimeout(() => {
-          document.getElementById("lockBox").style.display = "block";
-        }, 5000); 
-      }
-    }
-
-    setInterval(updateTime, 1000);
-    updateTime();
-  </script>
-
-  
-  <script src="script.js?v=2"></script>
+    <script src="sn.js"></script>
 </body>
+
 </html>
