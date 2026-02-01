@@ -4,15 +4,68 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Nhập Mật Khẩu</title>
-  <link rel="stylesheet" href="style.css?v=2" />
+  <link rel="stylesheet" href="style.css?v=5" />
+
+  <style>
+    body {
+      background: #000;
+    }
+
+    .time-wrapper {
+      display: flex;
+      justify-content: center;
+      margin-top: 40px;
+      margin-bottom: 30px;
+    }
+
+    .time-box {
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      padding: 20px 30px;
+      text-align: center;
+      min-width: 260px;
+      box-shadow: 0 0 20px rgba(255, 105, 180, 0.25);
+    }
+
+    .date {
+      font-size: 16px;
+      color: #ddd;
+      margin-bottom: 8px;
+    }
+
+    .clock {
+      font-size: 42px;
+      font-weight: bold;
+      color: #ff69b4;
+      letter-spacing: 2px;
+    }
+
+    .password-section {
+      display: none;
+    }
+  </style>
 </head>
+
 <body>
   <div class="container">
     <div class="content">
-      <img src="images/avatar.jpg" alt="Avatar" class="avatar" />
-      <div class="password-section">
+
+      <!-- KHUNG THỜI GIAN -->
+      <div class="time-wrapper">
+        <div class="time-box">
+          <div class="date" id="date"></div>
+          <div class="clock" id="clock"></div>
+        </div>
+      </div>
+
+      <!-- KHUNG NHẬP PASS -->
+      <div class="password-section" id="lockBox">
+        <img src="images/avatar.jpg" alt="Avatar" class="avatar" />
+
         <h1>NHẬP PASS ĐI NGƯỜI ĐẸP</h1>
-        <input type="text" id="password" placeholder="Enter password" readonly />
+
+        <input type="text" id="password" readonly />
+
         <div class="keypad">
           <button onclick="addNumber('1')">1</button>
           <button onclick="addNumber('2')">2</button>
@@ -26,10 +79,51 @@
           <button onclick="addNumber('0')" class="zero">0</button>
           <button onclick="clearPassword()" class="clear">✖</button>
         </div>
+
         <button onclick="checkPassword()" class="submit">✔</button>
       </div>
+
     </div>
   </div>
+
+  <!-- SCRIPT THỜI GIAN + DELAY 5s -->
+  <script>
+    let unlocked = false;
+    let delayStarted = false;
+
+    function updateTime() {
+      const now = new Date();
+      const year = now.getFullYear();
+
+      // mốc sinh nhật năm hiện tại
+      const birthday = new Date(year, 1, 2, 0, 0, 0); // tháng 1 = tháng 2
+
+      const days = ["Chủ nhật","Thứ hai","Thứ ba","Thứ tư","Thứ năm","Thứ sáu","Thứ bảy"];
+
+      document.getElementById("date").innerText =
+        `${days[now.getDay()]}, ${now.getDate()}/${now.getMonth() + 1}/${now.getFullYear()}`;
+
+      document.getElementById("clock").innerText =
+        `${String(now.getHours()).padStart(2, "0")}:` +
+        `${String(now.getMinutes()).padStart(2, "0")}:` +
+        `${String(now.getSeconds()).padStart(2, "0")}`;
+
+      // tới đúng 00:00:00 ngày sinh
+      if (now >= birthday && !delayStarted) {
+        delayStarted = true;
+
+        setTimeout(() => {
+          document.getElementById("lockBox").style.display = "block";
+          unlocked = true;
+        }, 5000); // ⏳ đợi 5 giây
+      }
+    }
+
+    setInterval(updateTime, 1000);
+    updateTime();
+  </script>
+
+  <!-- SCRIPT PASS -->
   <script src="script.js?v=2"></script>
 </body>
 </html>
